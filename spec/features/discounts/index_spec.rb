@@ -36,5 +36,19 @@ RSpec.describe 'As a Merchant', type: :feature do
       expect(current_path).to eq(merchant_discount_path(@merchant_1, @discount_1))
 
     end
+
+    it 'shows the date and name of the next three holidays' do
+      visit merchant_discounts_path(@merchant_1)
+
+      expect(page).to have_content("Memorial Day")
+      expect(page).to have_content("2021-05-31")
+
+      expect(page).to have_content("Independence Day")
+      expect(page).to have_content("2021-07-05")
+
+      expect(page).to have_content("Labour Day")
+      expect(page).to have_content("2021-09-06")
+
+    end
   end
 end
