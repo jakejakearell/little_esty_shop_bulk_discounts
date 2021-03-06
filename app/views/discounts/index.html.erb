@@ -1,3 +1,11 @@
+<header>
+  <h6>Next Three Holidays</h6>
+  <% HolidaySearch.new.holidays.each do |holiday| %>
+    <%= holiday.name %><br>
+    <%= holiday.date %><br>
+  <% end %>
+</header>
+
 <% @merchant_discounts.each do |discount| %>
   <p>Discount <%= discount.percentage_discount %>0%
   Items needed to purchase for discount: <%= discount.quantity_threshold %>
