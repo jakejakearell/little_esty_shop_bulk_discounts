@@ -1,6 +1,7 @@
 class Merchant < ApplicationRecord
   validates_presence_of :name
   has_many :items
+  has_many :discounts
   has_many :invoice_items, through: :items
   has_many :invoices, through: :invoice_items
   has_many :customers, through: :invoices
@@ -42,6 +43,10 @@ class Merchant < ApplicationRecord
     .group(:id)
     .order('total_revenue DESC')
     .limit(5)
+  end
+
+  def merchant_discounts
+    discounts
   end
 
   def best_day

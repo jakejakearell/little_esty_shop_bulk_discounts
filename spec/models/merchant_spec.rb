@@ -6,6 +6,7 @@ describe Merchant do
   end
   describe "relationships" do
     it { should have_many :items }
+    it { should have_many :discounts }
     it { should have_many(:invoice_items).through(:items) }
     it {should have_many(:invoices).through(:invoice_items)}
     it { should have_many(:customers).through(:invoices) }
@@ -17,6 +18,10 @@ describe Merchant do
     before :each do
       @merchant1 = Merchant.create!(name: 'Hair Care')
       @merchant2 = Merchant.create!(name: 'Jewelry')
+      #
+      @discount_1 = @merchant1.discounts.create!(quantity_threshold: 5, percentage_discount: 0.5 )
+      @discount_2 = @merchant1.discounts.create!(quantity_threshold: 10, percentage_discount: 0.6 )
+      @discount_3 = @merchant1.discounts.create!(quantity_threshold: 15, percentage_discount: 0.9 )
 
       @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id, status: 1)
       @item_2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: @merchant1.id)
@@ -73,6 +78,10 @@ describe Merchant do
 
     it "top_5_items" do
       expect(@merchant1.top_5_items).to eq([@item_1, @item_2, @item_3, @item_8, @item_4])
+    end
+
+    it "merchant_discounts" do
+      expect(@merchant1.merchant_discounts).to eq([@discount_1, @discount_2, @discount_3])
     end
   end
 end
