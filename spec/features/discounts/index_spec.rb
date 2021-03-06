@@ -15,14 +15,26 @@ RSpec.describe 'As a Merchant', type: :feature do
     it 'shows me all of my invoices and their percentage discount and quantity thresholds' do
       visit merchant_discounts_path(@merchant_1)
 
-      expect(page).to have_content(@discount_1.percentage_discount)
-      expect(page).to have_content(@discount_1.quantity_threshold)
+      expect(page).to have_content("Discount #{@discount_1.percentage_discount}")
+      expect(page).to have_content("Items needed to purchase for discount: #{@discount_1.quantity_threshold}")
 
-      expect(page).to have_content(@discount_2.percentage_discount)
-      expect(page).to have_content(@discount_2.quantity_threshold)
+      expect(page).to have_content("Discount #{@discount_2.percentage_discount}")
+      expect(page).to have_content("Items needed to purchase for discount: #{@discount_2.quantity_threshold}")
 
-      expect(page).to have_no_content(@discount_3.percentage_discount)
-      expect(page).to have_no_content(@discount_3.quantity_threshold)
+      expect(page).to have_no_content("Discount #{@discount_3.percentage_discount}")
+      expect(page).to have_no_content("Items needed to purchase for discount: #{@discount_3.quantity_threshold}")
+    end
+
+    it 'next to each discount is a link taking me to its show page' do
+      visit merchant_discounts_path(@merchant_1)
+
+      expect(page).to have_link("Discount #{@discount_1.id} information")
+      expect(page).to have_link("Discount #{@discount_2.id} information")
+
+      click_link "Discount #{@discount_1.id} information"
+
+      expect(current_path).to eq(merchant_discount_path(@merchant_1, @discount_1))
+
     end
   end
 end
