@@ -45,6 +45,10 @@ class Merchant < ApplicationRecord
     .limit(5)
   end
 
+  def merchant_discounts
+    discounts
+  end
+
   def best_day
     invoices
     .where("invoices.status = 2")
