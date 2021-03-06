@@ -117,7 +117,7 @@ RSpec.describe 'merchant dashboard' do
   end
 
   it 'can see a link to my merchant discount index' do
-    expect(page).to have_link("Items")
+    expect(page).to have_link("Discounts")
 
     click_link "Discounts"
 
