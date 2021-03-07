@@ -2,7 +2,7 @@ require './app/services/nager_service'
 require './app/poros/holiday'
 
 class HolidaySearch
-  def holidays
+  def info
     service.holiday_info.map do |data|
       Holiday.new(data)
     end
@@ -10,5 +10,9 @@ class HolidaySearch
 
   def service
     NagerService.new
+  end
+
+  def holidays
+    @holidays ||= HolidaySearch.new.info
   end
 end

@@ -1,0 +1,5 @@
+<h1>Create Merchant Discount</h1>
+
+<%= render partial: 'form', locals: {path: merchant_discounts_path(params[:merchant_id]),
+                                      method: :post,
+                                      button_text: "Submit"} %>

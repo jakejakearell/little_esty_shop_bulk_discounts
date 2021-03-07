@@ -11,3 +11,6 @@
   Items needed to purchase for discount: <%= discount.quantity_threshold %>
   <%= link_to "Discount #{discount.id} information", merchant_discount_path(discount.merchant, discount), style: 'pull-right' %> </p>
 <% end %>
+
+
+<%= link_to "New Discount", new_merchant_discount_path(params[:merchant_id]), style: 'pull-right' %>
