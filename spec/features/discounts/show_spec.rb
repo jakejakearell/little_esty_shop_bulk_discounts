@@ -12,7 +12,7 @@ RSpec.describe 'As a Merchant', type: :feature do
   end
 
   describe 'When i visit a discount show page' do
-    it 'shows me their percentage discount and quantity thresholds' do
+    it 'I see its percentage discount and quantity thresholds' do
       visit merchant_discount_path(@merchant_1, @discount_1)
 
       expect(page).to have_content(@discount_1.quantity_threshold)
@@ -23,6 +23,17 @@ RSpec.describe 'As a Merchant', type: :feature do
 
       expect(page).to have_no_content(@discount_3.quantity_threshold)
       expect(page).to have_no_content(@discount_3.percentage_discount)
+    end
+
+    it 'I see a link to edit the discount that takes me to a new edit page' do
+      visit merchant_discount_path(@merchant_1, @discount_1)
+
+      expect(page).to have_link("Edit Discount")
+
+      click_link "Edit Discount"
+
+      expect(current_path).to eq(edit_merchant_discount(@discount_1))
+
     end
   end
 end
