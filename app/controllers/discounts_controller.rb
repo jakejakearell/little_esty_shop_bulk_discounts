@@ -24,6 +24,10 @@ class DiscountsController < ApplicationController
     end
   end
 
+  def edit
+
+  end 
+
   private
 
   def discount_params
