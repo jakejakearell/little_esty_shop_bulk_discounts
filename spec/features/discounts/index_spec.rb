@@ -50,5 +50,16 @@ RSpec.describe 'As a Merchant', type: :feature do
       expect(page).to have_content("2021-09-06")
 
     end
+
+    it 'I see a link to create a new discount that takes me to a new page' do
+      visit merchant_discounts_path(@merchant_1)
+
+      expect(page).to have_link("New Discount")
+
+      click_link "New Discount"
+
+      expect(current_path).to eq(merchant_discount_new_path(@merchant_1, @discount_1))
+
+    end
   end
 end
