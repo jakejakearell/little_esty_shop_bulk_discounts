@@ -58,7 +58,7 @@ RSpec.describe 'As a Merchant', type: :feature do
 
       click_link "New Discount"
 
-      expect(current_path).to eq(merchant_discount_new_path(@merchant_1, @discount_1))
+      expect(current_path).to eq(new_merchant_discount_path(@merchant_1))
 
     end
   end
