@@ -61,5 +61,23 @@ RSpec.describe 'As a Merchant', type: :feature do
       expect(current_path).to eq(new_merchant_discount_path(@merchant_1))
 
     end
+
+    it 'next to every discount I see a link to delete the discount' do
+      visit merchant_discounts_path(@merchant_1)
+
+      expect(page).to have_link("Discount #{@discount_1.id} delete")
+      expect(page).to have_link("Discount #{@discount_2.id} delete")
+
+    end
+
+    it 'when I click on a delete link I am taken back to the index page where I do not see that item anymore ' do
+      visit merchant_discounts_path(@merchant_1)
+
+      expect(page).to have_content("Discount #{@discount_1.percentage_discount}")
+
+      click_link ("Discount #{@discount_1.id} delete")
+      expect(current_path).to eq(merchant_discounts_path(@merchant_1))
+      expect(page).to have_no_content("Discount #{@discount_1.percentage_discount}")
+    end
   end
 end
