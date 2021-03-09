@@ -6,6 +6,10 @@ class Discount < ApplicationRecord
   validates :quantity_threshold, numericality: true
 
   belongs_to :merchant
+  has_many :items, through: :merchant
+  has_many :invoice_items, through: :items
+  has_many :invoices, through: :invoice_items
+
 
   def percentage_discount_exists?
     !percentage_discount.nil?
