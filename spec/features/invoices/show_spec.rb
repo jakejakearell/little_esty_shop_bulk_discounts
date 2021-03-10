@@ -94,6 +94,12 @@ RSpec.describe 'invoices show' do
     expect(page).to have_content("Total Revenue: 55.0")
   end
 
+  it "shows the link for any discounts applied" do
+    visit merchant_invoice_path(@merchant2, @invoice_2)
+
+    expect(page).to have_link 'Discount Applied', href: merchant_discount_path(@merchant2, @discount2)
+  end
+
   it "shows a select field to update the invoice status" do
     visit merchant_invoice_path(@merchant1, @invoice_1)
 
