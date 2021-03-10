@@ -23,10 +23,10 @@ ii_4 = InvoiceItem.create!(invoice_id: invoice_1.id, item_id: item_4.id, quantit
 
 merchant2 = Merchant.create!(name: 'Dogs R U')
 
-item_5 = Item.create!(name: "Dog Food", description: "Feed this to a dog", unit_price: 10, merchant_id: merchant1.id, status: 1)
-item_6 = Item.create!(name: "Dog collar", description: "Put it on your dog", unit_price: 10, merchant_id: merchant1.id, status: 1)
-item_7 = Item.create!(name: "dog stuff", description: "Idk, but dogs love this", unit_price: 10, merchant_id: merchant1.id, status: 1)
-item_8 = Item.create!(name: "Treats", description: "Dog Treats", unit_price: 5, merchant_id: merchant1.id)
+item_5 = Item.create!(name: "Dog Food", description: "Feed this to a dog", unit_price: 10, merchant_id: merchant2.id, status: 1)
+item_6 = Item.create!(name: "Dog collar", description: "Put it on your dog", unit_price: 10, merchant_id: merchant2.id, status: 1)
+item_7 = Item.create!(name: "dog stuff", description: "Idk, but dogs love this", unit_price: 10, merchant_id: merchant2.id, status: 1)
+item_8 = Item.create!(name: "Treats", description: "Dog Treats", unit_price: 5, merchant_id: merchant2.id)
 
 customer_2 = Customer.create!(first_name: 'Jimmy', last_name: 'Smitz')
 
