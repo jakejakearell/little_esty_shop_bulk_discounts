@@ -1,9 +1,13 @@
 <header>
   <h6>Next Three Holidays</h6>
+  <section id="next_three_holidays">
   <% HolidaySearch.new.holidays.each do |holiday| %>
+    <section class="holidays">
     <%= holiday.name %><br>
     <%= holiday.date %><br>
+    </section>
   <% end %>
+</section>
 </header>
 
 <% @merchant_discounts.each do |discount| %>
