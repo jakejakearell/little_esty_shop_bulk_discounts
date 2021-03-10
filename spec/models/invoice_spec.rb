@@ -39,33 +39,33 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe "instance methods" do
-    describe "::total_revenue_with_no_discount" do
+    describe "::total_revenue_of_items_with_no_discounts" do
       it 'returns total revenue of items that have no discounts applied' do
-        expect(@invoice_1.total_revenue_no_discount).to eq(10)
+        expect(@invoice_1.total_revenue_of_items_with_no_discounts).to eq(10)
       end
     end
 
-    describe "::total_revenue_with_no_discount" do
-      it 'returns total revenue of items that have no discounts applied' do
-        expect(@invoice_1.total_revenue_discount).to eq(36)
+    describe "::total_revenue_of_items_with_discounts" do
+      it 'returns total revenue of items that have discounts applied and will choose the best discount' do
+        expect(@invoice_1.total_revenue_of_items_with_discounts).to eq(36)
       end
     end
 
     describe "::total_revenue" do
-      it 'returns total revenue of all items regardless of disocunt status' do
+      it 'returns total revenue of all items regardless of discount status' do
         expect(@invoice_1.total_revenue).to eq(46)
       end
     end
 
-    describe "::number_of_items_with_discount" do
-      it 'returns total revenue of all items regardless of disocunt status' do
-        expect(@invoice_1.number_of_items_with_discount).to eq(3)
+    describe "::number_of_discounts_invoice_is_eligible_for" do
+      it 'returns an the number of discounts an invoice would be eligible for' do
+        expect(@invoice_1.number_of_discounts_invoice_is_eligible_for).to eq(3)
       end
     end
 
-    describe "::total_revenue_nil_discounts" do
-      it 'returns total revenue of all items regardless of disocunt status' do
-        expect(@invoice_1.total_revenue_nil_discounts).to eq(100)
+    describe "::total_revenue_no_discounts" do
+      it 'returns total revenue of all items when discounts for the merchant do not exist' do
+        expect(@invoice_1.total_revenue_no_discounts).to eq(100)
       end
     end
   end
