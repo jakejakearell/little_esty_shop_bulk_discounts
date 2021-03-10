@@ -40,15 +40,16 @@ RSpec.describe 'As a Merchant', type: :feature do
     it 'shows the date and name of the next three holidays' do
       visit merchant_discounts_path(@merchant_1)
 
-      expect(page).to have_content("Memorial Day")
-      expect(page).to have_content("2021-05-31")
+      within "#next_three_holidays" do
+        expect(page.all('.holidays')[0]).to have_content("Memorial Day")
+        expect(page.all('.holidays')[0]).to have_content("2021-05-31")
 
-      expect(page).to have_content("Independence Day")
-      expect(page).to have_content("2021-07-05")
+        expect(page.all('.holidays')[1]).to have_content("Independence Day")
+        expect(page.all('.holidays')[1]).to have_content("2021-07-05")
 
-      expect(page).to have_content("Labour Day")
-      expect(page).to have_content("2021-09-06")
-
+        expect(page.all('.holidays')[2]).to have_content("Labour Day")
+        expect(page.all('.holidays')[2]).to have_content("2021-09-06")
+      end
     end
 
     it 'I see a link to create a new discount that takes me to a new page' do
@@ -78,6 +79,14 @@ RSpec.describe 'As a Merchant', type: :feature do
       click_button ("Discount #{@discount_1.id} delete")
       expect(current_path).to eq(merchant_discounts_path(@merchant_1))
       expect(page).to have_no_content("Discount #{@discount_1.percentage_discount}")
+    end
+
+    it 'has a link to take me back to my dashboard' do
+      visit merchant_discounts_path(@merchant_1)
+
+      click_link "My Dashboard"
+
+      expect(current_path).to eq(merchant_dashboard_index_path(@merchant_1))
     end
   end
 end
