@@ -22,7 +22,7 @@ class Invoice < ApplicationRecord
   def number_of_items_with_discount
     merchants
     .joins(:discounts)
-    .where("invoice_items.quantity > discounts.quantity_threshold")
+    .where("invoice_items.quantity >= discounts.quantity_threshold")
     .count
   end
 

@@ -59,7 +59,7 @@ RSpec.describe Invoice, type: :model do
 
     describe "::number_of_items_with_discount" do
       it 'returns total revenue of all items regardless of disocunt status' do
-        expect(@invoice_1.number_of_items_with_discount).to eq(2)
+        expect(@invoice_1.number_of_items_with_discount).to eq(3)
       end
     end
 
