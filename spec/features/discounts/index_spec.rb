@@ -79,5 +79,13 @@ RSpec.describe 'As a Merchant', type: :feature do
       expect(current_path).to eq(merchant_discounts_path(@merchant_1))
       expect(page).to have_no_content("Discount #{@discount_1.percentage_discount}")
     end
+
+    it 'has a link to take me back to my dashboard' do
+      visit merchant_discounts_path(@merchant_1)
+
+      click_link "My Dashboard"
+
+      expect(current_path).to eq(merchant_dashboard_index_path(@merchant_1))
+    end
   end
 end
