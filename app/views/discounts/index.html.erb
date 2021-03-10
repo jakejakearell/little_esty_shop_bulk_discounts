@@ -14,4 +14,6 @@
 <% end %>
 
 
-<%= link_to "New Discount", new_merchant_discount_path(params[:merchant_id]), style: 'pull-right' %>
+<%= link_to "New Discount", new_merchant_discount_path(params[:merchant_id]), style: 'pull-right' %><br>
+
+<%= link_to "My Dashboard", merchant_dashboard_index_path(params[:merchant_id]), style: 'pull-right' %>
