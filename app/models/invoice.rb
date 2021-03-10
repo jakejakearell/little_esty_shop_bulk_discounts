@@ -12,21 +12,21 @@ class Invoice < ApplicationRecord
   enum status: [:cancelled, :in_progress, :complete]
 
   def total_revenue
-    if number_of_items_with_discount == 0
-      total_revenue_nil_discounts
+    if number_of_discounts_invoice_is_eligible_for == 0
+      total_revenue_no_discounts
     else
-      (total_revenue_no_discount +  total_revenue_discount)
+      (total_revenue_of_items_with_no_discounts +  total_revenue_of_items_with_discounts)
     end
   end
 
-  def number_of_items_with_discount
+  def number_of_discounts_invoice_is_eligible_for
     merchants
     .joins(:discounts)
     .where("invoice_items.quantity >= discounts.quantity_threshold")
     .count
   end
 
-  def total_revenue_no_discount
+  def total_revenue_of_items_with_no_discounts
     merchants
     .joins(:discounts)
     .where("invoice_items.quantity < discounts.quantity_threshold")
@@ -37,7 +37,7 @@ class Invoice < ApplicationRecord
     .sum
   end
 
-  def total_revenue_discount
+  def total_revenue_of_items_with_discounts
     merchants
     .joins(:discounts)
     .where("discounts.quantity_threshold <= invoice_items.quantity")
@@ -48,7 +48,7 @@ class Invoice < ApplicationRecord
     .sum
   end
 
-  def total_revenue_nil_discounts
+  def total_revenue_no_discounts
     invoice_items.sum("unit_price * quantity")
   end
 end
